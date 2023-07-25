@@ -46,10 +46,35 @@ class ViewController: UIViewController {
                 if Data != nil {
                     do{
                     let jsonResponse = try JSONSerialization.jsonObject(with: Data!, options: JSONSerialization.ReadingOptions.mutableContainers)
+                        as! Dictionary<String, Any>
                         
                         
                         DispatchQueue.main.async {
-                            print(jsonResponse)
+                            if let rates = jsonResponse["rates"] as? [String: Any]{
+                                //print(rates)
+                                
+                                //MARK: -You need to shorten these blocks
+                                
+                                if let cad = rates["CAD"] as? Double{
+                                    self.cadLabel.text = "CAD: \(cad)"
+                                }
+                                
+                                
+                                if let chf = rates["CHF"] as? Double{
+                                    self.chfLabel.text = "CHF: \(chf)"
+                                }
+                                
+                                
+                                if let gbp = rates["GBP"] as? Double{
+                                    self.gbpLabel.text = "GBP: \(gbp)"
+                                }
+                                
+                                
+                                if let jpy = rates["JPY"] as? Double{
+                                    self.jpyLabel.text = "JPY: \(jpy)"
+                                }
+                            }
+                            
                         }
                         
                     }catch{
